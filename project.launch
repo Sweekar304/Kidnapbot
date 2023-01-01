@@ -1,0 +1,31 @@
+<launch>
+  <arg name="sim" default="true"/>
+  <arg name="use_tf" default="false"/>
+  <rosparam param="use_tf" subst_value="true">$(arg use_tf)</rosparam>
+  <!-- <rosparam param="flag_switch" subst_value="true">$(arg use_tf)</rosparam> -->
+
+  <include file="$(find asl_turtlebot)/launch/root.launch">
+    <!-- <arg name="world" value="project_city_mega" /> -->
+    <arg name="world" value="new_world" />
+    <arg name="x_pos" default="3.15"/>
+    <arg name="y_pos" default="1.6"/>
+    <arg name="z_pos" default="0.0"/>
+    <!-- <arg name="rviz" default="section4"/> -->
+    <arg name="rviz" default="project_config_rviz_final_final"/>
+    <arg name="model" default="asl_turtlebot"/>
+    <arg name="sim" default="$(arg sim)"/>
+    <arg name="gui" value="false" />
+    <!-- <arg name="detector" default="detector_mobilenet.py" /> -->
+    <arg name="detector" default="detector.py" />
+  </include>
+
+ <!-- <node pkg="asl_turtlebot" type="navigator_marker.py" name="navigator" output="screen"/>  -->
+ <node pkg="asl_turtlebot" type="navigator.py" name="navigator" output="screen"/> 
+ <node pkg="asl_turtlebot" type="marker.py" name="marker" output="screen"/> 
+    <!-- <param name = "flag_switch" value = "true"/>
+  </node> -->
+ <!-- <node pkg="asl_turtlebot" type="supervisor.py" name="supervisor" output="screen" />  -->
+ <node pkg="asl_turtlebot" type="detector_mobilenet.py" name="detector_mobilenet" output="screen" />
+ <!-- <node pkg="asl_turtlebot" type="pose_controller.py" name="turtlebot_pose_controller" /> -->
+ <!-- <node pkg="asl_turtlebot" type="gazebo_plot.py" name="gazebo_plot" /> -->
+</launch>
